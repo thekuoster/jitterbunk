@@ -1,0 +1,30 @@
+{% load staticfiles %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'bunks/css/bootstrap.min.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static 'bunks/css/style.css' %}"/>
+
+<script src="{% static 'bunks/js/jquery-1.10.2.min.js' %}"></script>
+<script src="{% static 'bunks/js/typeahead.bundle.js' %}"></script>
+
+<script type="text/javascript">
+
+    var users = ['hi', 'welrk', 'lskdj'];
+
+    $('#bunking .typeahead').typeahead(
+    {
+      name: 'users',
+      displayKey: 'value',
+      source: users,
+    });
+</script>
+
+{% if bunker.first_name %}
+    <h2 class="text-center"> Hi {{ bunker.first_name }}, who would you like to Bunk? </h2>
+{% else %}
+    <h2 class="text-center"> Hi {{ bunker.username }}, who would you like to Bunk? </h2>
+{% endif %}
+    <div id="bunking" class="text-center">
+        <input class="typeahead" type="text" placeholder="Enter a username"/>
+    </div>
+
+<script src="{% static 'bunks/js/bootstrap.min.js' %}"></script>

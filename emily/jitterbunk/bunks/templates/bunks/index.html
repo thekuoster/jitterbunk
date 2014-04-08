@@ -1,0 +1,38 @@
+{% load staticfiles %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'bunks/css/bootstrap.min.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static 'bunks/css/style.css' %}"/>
+
+<script src="{% static 'bunks/js/jquery-1.10.2.min.js' %}"></script>
+
+<div class="col-md-1"></div>
+<table class="col-md-10">
+    <tbody>
+        <tr>
+            <td colspan="3" class="text-center table-title">Bunk Feed</td>
+        </tr>
+        {% if latest_bunk_feed %}
+            {% for bunk in latest_bunk_feed %}
+                <tr >
+                    <td class='col-md-3 text-center bunk-cell'>
+                        <a class="user-button" href="{% url 'bunks:detail' bunk.from_user.id %}">{{bunk.from_user.username}}</a>
+                    </td>
+                    <td class='col-md-3 text-center bunk-cell'>
+                        BUNKED
+                    </td>
+                    <td class='col-md-3 text-center bunk-cell'>
+                        <a class="user-button" href="{% url 'bunks:detail' bunk.to_user.id %}">{{bunk.to_user.username}}</a>
+                    </td>
+                    <td class='time'>
+                        {{ bunk.time }}
+                    </td>
+                </tr>
+            {% endfor %}
+        {% else %}
+        <tr class="text-center">No one has been bunked</tr>
+        {% endif %}
+    </tbody>
+</table>
+
+
+<script src="{% static 'bunks/js/bootstrap.min.js' %}"></script>

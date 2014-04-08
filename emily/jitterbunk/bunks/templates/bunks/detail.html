@@ -1,0 +1,79 @@
+{% load staticfiles %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'bunks/css/bootstrap.min.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static 'bunks/css/style.css' %}"/>
+
+<script src="{% static 'bunks/js/jquery-1.10.2.min.js' %}"></script>
+
+<div class="col-md-1"></div>
+<table class="col-md-10">
+    <tbody>
+        <tr>
+            <td colspan="4" class="text-center table-title">{{ user.username }}'s Bunk Feed</td>
+        </tr>
+        <tr>
+            <td colspan="4" class="text-center">
+                <form action="{% url 'bunks:bunk' user.id %}" method="post">
+                    {% csrf_token %}
+                    <input type="text" name="bunkee" placeholder="Bunk someone!"></input>
+                    <input type="submit" value="Bunk"/>
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4" class="text-center">
+                {{ error_message }}
+            </td>
+        </tr>
+        <tr>
+            <td class="section-header">
+                From {{ user.username }}
+            </td>
+        </tr>
+        {% if bunks_from %}
+            {% for bunk in bunks_from %}
+                <tr >
+                    <td class='col-md-2'>
+                    </td>
+                    <td colspan="2" class='col-md-4 text-center bunk-cell'>
+                        {{ user.username }} bunked
+                    </td>
+                    <td class='col-md-2 text-center bunk-cell'>
+                        <a class="user-button" href="{% url 'bunks:detail' bunk.to_user.id %}">{{bunk.to_user.username}}</a>
+                    </td>
+                    <td class='time'>
+                        {{ bunk.time }}
+                    </td>
+                </tr>
+            {% endfor %}
+        {% else %}
+        <tr class="text-center">{{ user.username }} has not bunked anyone.</tr>
+        {% endif %}
+        <tr>
+            <td class="section-header">
+                To {{ user.username }}
+            </td>
+        </tr>
+        {% if bunks_to %}
+            {% for bunk in bunks_to %}
+                <tr >
+                    <td class='col-md-2 text-center bunk-cell'>
+                        <a class="user-button" href="{% url 'bunks:detail' bunk.from_user.id %}">{{bunk.from_user.username}}</a>
+                    </td>
+                    <td colspan="2" class='col-md-4 text-center bunk-cell'>
+                        bunked {{ user.username }}
+                    </td>
+                    <td class='col-md-2'>
+                    </td>
+                    <td class='time'>
+                        {{ bunk.time }}
+                    </td>
+                </tr>
+            {% endfor %}
+        {% else %}
+        <tr class="text-center">{{ user.username }} has not been bunked by anyone.</tr>
+        {% endif %}
+    </tbody>
+</table>
+
+<script src="{% static 'bunks/js/bootstrap.min.js' %}"></script>

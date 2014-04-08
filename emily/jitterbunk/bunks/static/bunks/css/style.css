@@ -1,0 +1,46 @@
+.table-title{
+    padding: 1em 0 .5em 0;
+    font-size: xx-large;
+}
+
+.bunk-cell{
+    padding: 1em 0;
+}
+
+.user-button{  
+    display: block;
+    border-radius: 50%;
+    text-align: center;
+    width: 75px;
+    height: 75px;
+    line-height: 75px;
+    margin: 0 auto;
+    background: gray;
+    color: white;
+}
+
+.user-button:hover{
+    text-decoration: none;
+    color: black;
+    background: lightgray;
+}
+
+.section-header{
+    padding: 1em 0 .5em 0;
+    font-size: x-large;
+}
+
+.typeahead{
+    width: 300px;
+    height: 30px;
+    padding: 8px 12px;
+    font-size: 20px;
+    line-height: 30px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+}
+
+.time{
+    color: lightgray;
+    font-size: small;
+}
